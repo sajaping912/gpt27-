@@ -2310,11 +2310,9 @@ function startFireworks(sentenceTextForFireworks, globalSentenceIndex, explosion
     const baseRadius = 51.2 * 0.88; const maxRadius = 120.96 * 0.88 * 0.95; // Adjusted maxRadius
     let centerX = explosionX; const margin = 8;
     if (centerX - maxRadius < margin) centerX = margin + maxRadius;
-    if (centerX + maxRadius > canvas.width - margin) centerX = canvas.width - margin - maxRadius;
-
-    fireworks = [];
+    if (centerX + maxRadius > canvas.width - margin) centerX = canvas.width - margin - maxRadius;    fireworks = [];
     fireworksState = {
-        t: 0, phase: "explode", holdDuration: 60, explodeDuration: 180, gatherDuration: 45,
+        t: 0, phase: "explode", holdDuration: 40, explodeDuration: 120, gatherDuration: 30,
         originX: centerX, originY: explosionY,
         sentenceTextToDisplayAfter: sentenceTextForFireworks,
         finalSentenceIndex: globalSentenceIndex,
@@ -2432,13 +2430,11 @@ function updateFireworks() {
             }
             wordIndexInFireworks++;
         }
-    }
-
-    fireworks.forEach((fw) => {
-      fw.x += (fw.targetX - fw.x) * ease * 0.2;
-      fw.y += (fw.targetY - fw.y) * ease * 0.2;
+    }    fireworks.forEach((fw) => {
+      fw.x += (fw.targetX - fw.x) * ease * 0.3;
+      fw.y += (fw.targetY - fw.y) * ease * 0.3;
     });
-    centerAlpha += (1.0 - centerAlpha) * ease * 0.15;
+    centerAlpha += (1.0 - centerAlpha) * ease * 0.2;
 
     if (progress >= 1) {
         fireworksState.phase = "done";
